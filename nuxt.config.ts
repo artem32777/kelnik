@@ -59,7 +59,7 @@ export default defineNuxtConfig({
 
 	nitro: {
 		routeRules: {
-			'/**': { isr: 60 },
+			'/**': { prerender: true, isr: 60 },
 		},
 	},
 	vite: {
