@@ -57,11 +57,6 @@ export default defineNuxtConfig({
 
 	compatibilityDate: '2025-07-18',
 
-	nitro: {
-		routeRules: {
-			'/**': { prerender: true, isr: 60 },
-		},
-	},
 	vite: {
 		css: {
 			preprocessorOptions: {
