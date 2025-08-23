@@ -1,0 +1,8 @@
+@mixin transition-weight-grow($offset: 0.3px, $color: currentColor, $time: 0.3s) {
+  text-shadow:
+  (-$offset) (-$offset) 0 $color,
+  $offset (-$offset) 0 $color,
+  (-$offset) $offset 0 $color,
+  $offset $offset 0 $color;
+  transition: all $time ease-in-out;
+}

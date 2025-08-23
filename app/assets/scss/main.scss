@@ -1,0 +1,13 @@
+@use "fonts";
+@use "colors";
+@use "reset";
+@use "typography";
+
+body{
+  font-family: 'pt-root-ui', sans-serif;
+  color: var(--main-black);
+  line-height: 1;
+}
+
+
+

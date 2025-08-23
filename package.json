@@ -1,0 +1,30 @@
+{
+  "name": "kelnik-test-app",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --no-cache",
+    "lint:fix": "eslint . --fix --no-cache"
+  },
+  "dependencies": {
+    "@nuxt/eslint": "^1.8.0",
+    "@nuxt/icon": "^2.0.0",
+    "@nuxt/image": "^1.11.0",
+    "@pinia/nuxt": "^0.11.2",
+    "eslint": "^9.33.0",
+    "nuxt": "^4.0.3",
+    "pinia": "^3.0.3",
+    "pinia-plugin-persistedstate": "^4.5.0",
+    "vue": "^3.5.18",
+    "vue-3-slider-component": "^1.0.2",
+    "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.90.0"
+  }
+}
