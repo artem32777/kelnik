@@ -46,6 +46,7 @@ const model = defineModel<MinMaxRange>({ required: true })
 }
 
 .filter-range {
+  cursor: pointer;
   @media (max-width:$lg2){
     font-size: 14px;
   }

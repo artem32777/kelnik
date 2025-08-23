@@ -1,10 +1,6 @@
-export interface TableProps {
-	items: Record<string, any>[]
-	columns: {
-		label: string
-		sortKey?: string
-	}[]
-	pending?: boolean
+export interface TableColumn {
+	label: string
+	sortKey?: string
 }
 
 export type TableSorting = {

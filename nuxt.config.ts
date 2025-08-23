@@ -23,6 +23,9 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
+			htmlAttrs: {
+				lang: 'ru',
+			},
 			titleTemplate: '%s | Кельник',
 			link: [
 				{
@@ -54,6 +57,11 @@ export default defineNuxtConfig({
 
 	compatibilityDate: '2025-07-18',
 
+	nitro: {
+		routeRules: {
+			'/**': { isr: 60 },
+		},
+	},
 	vite: {
 		css: {
 			preprocessorOptions: {

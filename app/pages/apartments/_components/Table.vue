@@ -1,51 +1,20 @@
 <script setup lang="ts">
-import type { SortingDirection, TableProps } from '~/types/common/Table'
-
 const store = useApartmentsTableStore()
 const { fetchMoreItems } = store
-const { canFetchMoreItems, pending, items, sorting } = storeToRefs(store)
-
-const columns: TableProps['columns'] = [
-	{ label: 'Планировка' },
-	{ label: 'Квартира' },
-	{ label: 'S, м²', sortKey: 'area' },
-	{ label: 'Этаж', sortKey: 'floor' },
-	{ label: 'Цена, ₽', sortKey: 'price' },
-]
-
-const setSort = (col: string, dir: SortingDirection) => {
-	sorting.value = sorting.value?.column === col && sorting.value?.direction === dir
-		? null
-		: { column: col, direction: dir }
-}
+const { canFetchMoreItems, pending, items } = storeToRefs(store)
 </script>
 
 <template>
 	<div>
 		<div class="table">
-			<header class="table__header">
-				<div
-					v-for="col in columns"
-					:key="col.label"
-					class="table__th"
-					:class="{ table__th_active: col.sortKey && sorting?.column === col.sortKey }"
-				>
-					{{ col.label }}
-					<UiButtonSort
-						v-if="col.sortKey"
-						:pending
-						:direction="sorting?.column === col.sortKey ? sorting?.direction : null"
-						@sort="dir => setSort(col.sortKey!, dir)"
-					/>
-				</div>
-			</header>
-			<main class="table__main">
+			<TableHeader />
+			<main class="table__content">
 				<article
 					v-for="item in items"
 					:key="item.id"
 					class="table__item"
 				>
-					<div class="table__main-names">
+					<div class="table__item-main">
 						<div class="table__td">
 							<NuxtImg
 								:src="item.image"
@@ -56,7 +25,7 @@ const setSort = (col: string, dir: SortingDirection) => {
 							{{ `${item.rooms}-комнатная №${item.id}` }}
 						</div>
 					</div>
-					<div class="table__main-properties">
+					<div class="table__item-properties">
 						<div class="table__td">
 							{{ item.area }}
 							<span class="table__area-label">м²</span>
@@ -74,12 +43,12 @@ const setSort = (col: string, dir: SortingDirection) => {
 			</main>
 		</div>
 
-		<span
+		<div
 			v-if="!items.length"
 			class="table__empty"
 		>
 			Нет доступных квартир. Измените настройки фильтра.
-		</span>
+		</div>
 
 		<UiButton
 			v-show="canFetchMoreItems && !pending"
@@ -93,47 +62,12 @@ const setSort = (col: string, dir: SortingDirection) => {
 
 <style scoped lang="scss">
 .table {
-  &__header {
-    padding-bottom: 20px;
-    display: grid;
-    grid-template-columns: 80px 1fr 120px 120px 120px;
-    gap: 20px;
-    width: 100%;
-    border-bottom: 1px solid var(--grey-4);
-    @media (max-width: $lg2) {
-      padding-bottom: 16px;
-      border-bottom: none;
-      grid-template-columns: 45px 48px 64px;
-    }
-  }
-
-  &__th {
-    font-size: 14px;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    white-space: nowrap;
-
-    &_active {
-      @include transition-weight-grow();
-      color: var(--green-1);
-    }
-
-    &:nth-child(1), &:nth-child(2) {
-      @media (max-width: $lg2) {
-        display: none;
-      }
-    }
-
-  }
-
-  &__main{
+  &__content{
     @media (max-width:$lg2){
       display: grid;
       gap: 4px;
     }
   }
-
   &__item {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -147,13 +81,13 @@ const setSort = (col: string, dir: SortingDirection) => {
       padding: 16px 0 0 24px;
       border: 1px solid var(--grey-4);
       border-radius: 8px;
-      gap: 0px;
+      gap: 0;
       height: 112px;
       display: block;
     }
   }
 
-  &__main-names {
+  &__item-main {
     display: grid;
     grid-template-columns: 80px 1fr;
     gap: 20px;
@@ -190,7 +124,7 @@ const setSort = (col: string, dir: SortingDirection) => {
     }
   }
 
-  &__main-properties {
+  &__item-properties {
     display: inline-grid;
     grid-template-columns: 120px 120px 120px;
     gap: 20px;
