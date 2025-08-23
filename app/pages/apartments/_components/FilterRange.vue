@@ -8,14 +8,13 @@ defineProps<{
 	label?: string
 }>()
 
-const model = defineModel<MinMaxRange>({ required: true })
+const model = defineModel<MinMaxRange>({ required: true, default: [0, 100] })
 </script>
 
 <template>
 	<div class="filter-range">
 		<span class="filter-range__label">
 			{{ label }}
-
 		</span>
 		<div class="filter-range__values">
 			<div class="filter-range__value-label">
@@ -28,10 +27,10 @@ const model = defineModel<MinMaxRange>({ required: true })
 		<div class="filter-range__slider">
 			<VueSlider
 				v-model="model"
-				:max
+				:max="max || 100"
+				:min="min || 0"
 				title="Фильтрация"
 				aria-label="Фильтрация"
-				:min
 				tooltip="none"
 			/>
 		</div>
